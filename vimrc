@@ -18,8 +18,6 @@ set path+=**                   " Recursive searching path
 set hlsearch                   " Highlight all seartch pattern
 set smartindent
 set cindent
-"set autoread
-:autocmd BufWritePost * silent !echo "<afile>" >> /home/akrupski/.pipe
 
 syntax on
 
@@ -63,6 +61,26 @@ function! My_switch()
     endif
 endfunction
 
+function! My_switch_test()
+    let fullFileName = expand('%:t')
+
+    let fileName = split(fullFileName, '\.')[0]
+    let fileExte = split(fullFileName, '\.')[1]
+
+    if(fileExte[0] == 'c')
+        let command = join(["find ", fileName, "Test.cpp"], '')
+        echo command
+        execute command
+    endif
+
+    if(fileExte[0] == 'h')
+        let command = join(["find ", fileName, "Test.cpp"], '')
+        echo command
+        execute command
+    endif
+endfunction
+
+
 function! My_class()
     let word = expand("<cword>")
     let command = join(['cat tags | ', 'grep "inherits.*[:,]', word, '\b" | ',"awk '{print $1}' | sed -r '",'s/^.*::(.*)$/\1/',"' | sort -u"], "")
@@ -89,7 +107,6 @@ function! My_insertInclude()
     " predefined for std
     let command = join(['cat tags | ', 'grep "^\b', word, '\b" |', "awk '{print $2}' |", 'sed "s/.*[iI]nclude\///" | sort -u'], "")
     let a = system(command)
-    "let a = substitute(system(command), '[[:cntrl:]]', '', 'g')
     let aa = split(a)
     let classList = []
     let classListW = []
@@ -110,11 +127,5 @@ function! My_insertInclude()
             :'h
         endif
     endif
-endfunction
-
-function! My_create()
-    let filePath = expand('%:p:h')
-    let name = input(join(["New file name: ", filePath]))
-    execute (join([":e ", filePath, name], ""))
 endfunction
 
