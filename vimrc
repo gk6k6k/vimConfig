@@ -41,6 +41,42 @@ set backupdir=~/.vim/tmp/
 set dir=~/.vim/tmp/
 set swapfile
 
+function! My_genMock()
+    1,%d
+    let fullFileName = expand('%:t')
+    let fullFileName = substitute(fullFileName, "Mock.hpp", ".hpp", "")
+    echo fullFileName
+
+    let generator = '/home/akrupski/bin/googletest-master/googlemock/scripts/generator/gmock_gen.py'
+    let command = join(['find ./ -name "', fullFileName, '"'], "")
+    let a = system(command)
+    let aa = split(a)
+    let classList = []
+    let classListW = []
+    let index = 0
+    for l:item in aa
+        let index = index + 1
+        call add(classList, item)
+        call add(classListW, join([index, ". ", item], ""))
+    endfor
+    if(index == 1)
+        let command = join(['source ~/.bashrc && cpp.genMock ', classList[0]], "")
+    else
+        let selection = inputlist(classListW)
+        if(selection == 0)
+        else
+            let command = join(['source ~/.bashrc && cpp.genMock ', classList[selection-1]], "")
+        endif
+    endif
+
+    let a = system(command)
+    let a = substitute(a,"^........","","")
+    for l:item in split(a, "\n")
+        call append(line('$'), item)
+    endfor
+    1,1d
+endfunction
+
 
 function! My_switch()
     let fullFileName = expand('%:t')
