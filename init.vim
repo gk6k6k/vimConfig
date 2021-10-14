@@ -28,6 +28,7 @@ nnoremap <A-l> <C-W><C-L>
 nnoremap <A-h> <C-W><C-H>
 
 "sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"dnf install ripgrep #https://github.com/BurntSushi/ripgrep
 call plug#begin('~/.config/nvim/plugged')
   Plug 'preservim/nerdtree'
   Plug 'b4winckler/vim-angry'
