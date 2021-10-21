@@ -1,0 +1,22 @@
+---
+BasedOnStyle: Google
+Language: Cpp
+IndentWidth: 4
+PointerAlignment: Left
+ColumnLimit: 120
+SpacesInParentheses: false
+SpaceBeforeParens: Never
+AllowShortBlocksOnASingleLine: false
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortFunctionsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortLambdasOnASingleLine: None
+FixNamespaceComments: false
+AccessModifierOffset: -4
+IncludeCategories:
+    - Regex: '^<'
+      Priority: 1
+    - Regex: '^"(spdlog|boost)/'
+      Priority: 1
+...
+

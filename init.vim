@@ -9,6 +9,7 @@ set shiftwidth=4
 set softtabstop=4
 set nowrap                     " don't wrap lines
 set cursorline                 " make line in current line
+set spell
 
 " navigation
 nnoremap <C-Right>   :tabnext<CR>
@@ -28,14 +29,13 @@ nnoremap <A-l> <C-W><C-L>
 nnoremap <A-h> <C-W><C-H>
 
 "sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"dnf install ripgrep #https://github.com/BurntSushi/ripgrep
 call plug#begin('~/.config/nvim/plugged')
   Plug 'preservim/nerdtree'
   Plug 'b4winckler/vim-angry'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
-  Plug 'rhysd/vim-clang-format'
+  Plug 'nvim-telescope/telescope.nvim' "dnf install ripgrep #https://github.com/BurntSushi/ripgrep
+  Plug 'sbdchd/neoformat' "pip install --user cmake-format
   Plug 'Pocco81/Catppuccino.nvim'
 
   Plug 'neovim/nvim-lspconfig'
@@ -154,4 +154,5 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
+
 
