@@ -37,6 +37,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'nvim-telescope/telescope.nvim' "dnf install ripgrep #https://github.com/BurntSushi/ripgrep
   Plug 'sbdchd/neoformat' "pip install --user cmake-format
   Plug 'Pocco81/Catppuccino.nvim'
+  Plug 'google/vim-searchindex'
 
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
