@@ -28,6 +28,9 @@ nnoremap <A-k> <C-W><C-K>
 nnoremap <A-l> <C-W><C-L>
 nnoremap <A-h> <C-W><C-H>
 
+":map <F2> :NERDTreeToggle<CR>
+nnoremap <F5> :ClangdSwitchSourceHeader<CR>
+
 "sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.config/nvim/plugged')
   Plug 'preservim/nerdtree'
@@ -38,12 +41,15 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'sbdchd/neoformat' "pip install --user cmake-format
   Plug 'Pocco81/Catppuccino.nvim'
   Plug 'google/vim-searchindex'
+  Plug 'kdheepak/lazygit.nvim'
+  Plug 'szw/vim-tags'
 
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'saadparwaiz1/cmp_luasnip'
   Plug 'L3MON4D3/LuaSnip'
+  Plug 'simrat39/symbols-outline.nvim'
 call plug#end()
 
 let g:coc_global_extensions = ['coc-spell-checker']
