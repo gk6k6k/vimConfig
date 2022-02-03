@@ -43,7 +43,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'Pocco81/Catppuccino.nvim'
   Plug 'google/vim-searchindex'
-  Plug 'kdheepak/lazygit.nvim'
+  Plug 'kdheepak/lazygit.nvim' " dnf copr enable atim/lazygit -y && dnf install lazygit
   Plug 'szw/vim-tags'
 
   Plug 'neovim/nvim-lspconfig'
