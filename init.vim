@@ -1,4 +1,7 @@
+" TODO auto download and install Noto Sans Mono font
+
 set number                     " print line number
+set colorcolumn=96
 set listchars=tab:»\ ,trail:·
 set list                       " print white characters
 set autoindent                 " use same tab size in new next line
@@ -10,6 +13,7 @@ set softtabstop=4
 set nowrap                     " don't wrap lines
 set cursorline                 " make line in current line
 set spell
+set path+=**
 
 " navigation
 nnoremap <C-Right>   :tabnext<CR>
@@ -28,9 +32,10 @@ nnoremap <A-k> <C-W><C-K>
 nnoremap <A-l> <C-W><C-L>
 nnoremap <A-h> <C-W><C-H>
 
-":map <F2> :NERDTreeToggle<CR>
-nnoremap <F5> :ClangdSwitchSourceHeader<CR>
+nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F4> :Neoformat<CR>
+":%s/\([a-z]\)) :\n\( \+\)/\1)\r\2:\r\2
+nnoremap <F5> :ClangdSwitchSourceHeader<CR>
 
 "sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.config/nvim/plugged')
@@ -40,11 +45,12 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim' "dnf install ripgrep #https://github.com/BurntSushi/ripgrep
   Plug 'sbdchd/neoformat' "pip install --user cmake-format
-  Plug 'lewis6991/gitsigns.nvim'
   Plug 'Pocco81/Catppuccino.nvim'
+  Plug 'lewis6991/gitsigns.nvim'
+  Plug 'feline-nvim/feline.nvim'
   Plug 'google/vim-searchindex'
   Plug 'kdheepak/lazygit.nvim' " dnf copr enable atim/lazygit -y && dnf install lazygit
-  Plug 'szw/vim-tags'
+"  Plug 'szw/vim-tags'
 
   Plug 'neovim/nvim-lspconfig'
   Plug 'hrsh7th/nvim-cmp'
@@ -58,13 +64,14 @@ call plug#end()
 
 let g:coc_global_extensions = ['coc-spell-checker']
 
-colorscheme catppuccino
+colorscheme catppuccin
 
 vmap <leader>a <Plug>(coc-codeaction-selected)
 nmap <leader>a <Plug>(coc-codeaction-selected)
 
 lua << EOF
 require('gitsigns').setup()
+require('feline').setup()
 
 require'lspconfig'.clangd.setup{}
 vim.lsp.set_log_level("debug")
