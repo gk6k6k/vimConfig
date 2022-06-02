@@ -15,6 +15,8 @@ set cursorline                 " make line in current line
 set spell
 set path+=**
 
+":autocmd BufWritePost * silent! !echo "p" > ~/pipe &
+
 " navigation
 nnoremap <C-Right>   :tabnext<CR>
 nnoremap <C-Left>   ::tabprevious<CR>
