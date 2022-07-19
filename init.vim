@@ -38,20 +38,26 @@ nnoremap <F2> :NERDTreeToggle<CR>
 nnoremap <F4> :Neoformat<CR>
 ":%s/\([a-z]\)) :\n\( \+\)/\1)\r\2:\r\2
 nnoremap <F5> :ClangdSwitchSourceHeader<CR>
+nnoremap <C-f> :Telescope find_files<CR>
 
 "sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.config/nvim/plugged')
-  Plug 'preservim/nerdtree'
   Plug 'b4winckler/vim-angry'
+  Plug 'sbdchd/neoformat' " For cmake -> pip install --user cmake-format
+  Plug 'preservim/nerdtree'
+  Plug 'kdheepak/lazygit.nvim' " dnf copr enable atim/lazygit -y && dnf install lazygit
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim' "dnf install ripgrep #https://github.com/BurntSushi/ripgrep
-  Plug 'sbdchd/neoformat' "pip install --user cmake-format
+
+"  Plug 'nvim-treesitter/nvim-treesitter'
+"  Plug 'antoinemadec/FixCursorHold.nvim'
+"  Plug 'nvim-neotest/neotest'
+
   Plug 'Pocco81/Catppuccino.nvim'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'feline-nvim/feline.nvim'
   Plug 'google/vim-searchindex'
-  Plug 'kdheepak/lazygit.nvim' " dnf copr enable atim/lazygit -y && dnf install lazygit
 "  Plug 'szw/vim-tags'
 
   Plug 'neovim/nvim-lspconfig'
@@ -61,7 +67,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'L3MON4D3/LuaSnip'
   Plug 'simrat39/symbols-outline.nvim'
   Plug 'nvie/vim-flake8'
-"  Plug 'nine2/vim-copyright'
+  Plug 'MattesGroeger/vim-bookmarks'
 call plug#end()
 
 let g:coc_global_extensions = ['coc-spell-checker']
@@ -73,7 +79,6 @@ nmap <leader>a <Plug>(coc-codeaction-selected)
 
 lua << EOF
 require('gitsigns').setup()
-require('feline').setup()
 
 require'lspconfig'.clangd.setup{}
 vim.lsp.set_log_level("debug")
@@ -175,6 +180,7 @@ for _, lsp in ipairs(servers) do
     }
   }
 end
+
 EOF
 
 
