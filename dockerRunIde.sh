@@ -1,11 +1,11 @@
 #!/bin/bash
 REPO_PATH=$(pwd)
 SCRIPT_PATH=$(dirname $0)
+PARRENT_IMAGENAME=$($SCRIPT_PATH/dockerRun.sh -i)
 MDSUM=($(md5sum ${SCRIPT_PATH}/Dockerfile))
+MDSUM=($(echo "$MDSUM $PARRENT_IMAGENAME" | md5sum))
 IMAGE_NAME="autodoc_"$MDSUM"image"
 CONTAINER_NAME=${IMAGE_NAME}_container
-
-PARRENT_IMAGENAME=$($SCRIPT_PATH/dockerRun.sh -i)
 
 if ! [ $(docker images ${IMAGE_NAME} | grep $IMAGE_NAME | wc -l) = "1" ]
 then
