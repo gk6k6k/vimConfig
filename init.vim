@@ -15,6 +15,7 @@ set nowrap                     " don't wrap lines
 set cursorline                 " make line in current line
 set spell
 set path+=**
+set clipboard+=unnamedplus
 
 
 " navigation
