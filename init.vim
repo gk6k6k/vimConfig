@@ -55,7 +55,7 @@ call plug#begin('~/.config/nvim/plugged')
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'google/vim-searchindex'
 
-  Plug 'neovim/nvim-lspconfig'
+  Plug 'neovim/nvim-lspconfig' "pip install --user python-lsp-server
 
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-buffer'
@@ -113,9 +113,23 @@ cmp.setup({
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
 require'lspconfig'.clangd.setup {
   capabilities = capabilities,
 }
+
+require'lspconfig'.pylsp.setup{
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = {
+          ignore = {'W391'}
+        }
+      }
+    }
+  }
+}
+
 
 local ls = require "luasnip"
 --local types = require "luasnip.util.types"
