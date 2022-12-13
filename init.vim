@@ -112,18 +112,29 @@ cmp.setup({
 })
 
 -- Setup lspconfig.
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+local on_attach = function(client, bufnr)
+    local bufopts = { noremap=true, silent=true, buffer=bufnr }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+end
 
 require'lspconfig'.clangd.setup {
+  on_attach = on_attach,
   capabilities = capabilities,
 }
 
 require'lspconfig'.pylsp.setup{
+  on_attach = on_attach,
   settings = {
     pylsp = {
       plugins = {
         pycodestyle = {
-          ignore = {'W391'}
+          ignore = {'W391'},
+          maxLineLength = 120
         }
       }
     }
