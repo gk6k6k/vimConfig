@@ -40,6 +40,7 @@ nnoremap <F3> :LazyGit<CR>
 nnoremap <F4> :Neoformat<CR>
 nnoremap <F5> :ClangdSwitchSourceHeader<CR>
 nnoremap <C-f> :Telescope find_files<CR>
+nnoremap <C-F> :Telescope live_grep<CR>
 
 "sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.config/nvim/plugged')
