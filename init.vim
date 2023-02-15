@@ -16,6 +16,7 @@ set cursorline                 " make line in current line
 set spell
 set path+=**
 set clipboard+=unnamedplus
+set mouse=
 
 
 " navigation
@@ -40,7 +41,8 @@ nnoremap <F3> :LazyGit<CR>
 nnoremap <F4> :Neoformat<CR>
 nnoremap <F5> :ClangdSwitchSourceHeader<CR>
 nnoremap <C-f> :Telescope find_files<CR>
-nnoremap <C-F> :Telescope live_grep<CR>
+nnoremap <C-g> :lua require('telescope.builtin').grep_string()<CR>
+"nnoremap <C-F> :Telescope live_grep<CR>
 
 "sh -c 'curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.config/nvim/plugged')
@@ -68,6 +70,7 @@ call plug#begin('~/.config/nvim/plugged')
 
   Plug 'mfussenegger/nvim-dap'
   Plug 'rcarriga/nvim-dap-ui'
+  Plug 'numToStr/Comment.nvim'
 
 "  Plug 'nvim-treesitter/nvim-treesitter'
 "  Plug 'antoinemadec/FixCursorHold.nvim'
@@ -83,6 +86,8 @@ colorscheme catppuccin
 set completeopt=menu,menuone,noselect
 
 lua << EOF
+
+require('Comment').setup()
 
 require('gitsigns').setup()
 
