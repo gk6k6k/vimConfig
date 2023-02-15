@@ -11,6 +11,11 @@ require('packer').startup(function(use)
   -- Package manager
   use 'wbthomason/packer.nvim'
 
+  use 'b4winckler/vim-angry'
+  use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
+
+  use 'kdheepak/lazygit.nvim'
+
   use { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     requires = {
@@ -96,13 +101,13 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = ''
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -125,12 +130,33 @@ vim.cmd [[colorscheme onedark]]
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
 
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.cino = 'g0N-s'
+vim.o.expandtab = true
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.wrap = false
+vim.o.spell = true
+
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+
+vim.keymap.set({ 'n' }, '<A-Down>', '<C-W><C-J>')
+vim.keymap.set({ 'n' }, '<A-Up>', '<C-W><C-K>')
+vim.keymap.set({ 'n' }, '<A-Right>', '<C-W><C-L>')
+vim.keymap.set({ 'n' }, '<A-Left>', '<C-W><C-H>')
+
+vim.keymap.set({ 'n' }, '<C-Right>', ':tabnext<CR>')
+vim.keymap.set({ 'n' }, '<C-Left>', '::tabprevious<CR>')
+vim.keymap.set({ 'n' }, '<F2>', ':NERDTreeToggle<CR>')
+vim.keymap.set({ 'n' }, '<F3>', ':LazyGit<CR>')
+vim.keymap.set({ 'n' }, '<F4>', ':Neoformat<CR>')
+
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -337,9 +363,9 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
+  clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
 
