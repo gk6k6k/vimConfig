@@ -13,6 +13,7 @@ require('packer').startup(function(use)
 
   use 'b4winckler/vim-angry'
   use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
+  use 'preservim/nerdtree'
 
   use 'kdheepak/lazygit.nvim'
 
