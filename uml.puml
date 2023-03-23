@@ -1,0 +1,30 @@
+@startuml
+class Driver
+class TurbochargedEngine
+class PetrolEngine
+class EletricEngine
+interface Person {
+ +std::string getName()
+}
+interface Engine {
+ +start()
+ +stop()
+}
+class Car {
+ -Engine
+ -std::vector<Person>
+ -std::unique_ptr<Driver>
+}
+class CarRentalCompany {
+ -std::vector<Car>
+}
+
+Car "0..n" --o CarRentalCompany
+Driver --o Car
+Engine --* Car
+Person "0..4" --o Car
+PetrolEngine ..|> Engine
+EletricEngine ..|> Engine
+TurbochargedEngine --|> PetrolEngine
+Driver ..|> Person
+@enduml
