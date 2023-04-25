@@ -139,6 +139,7 @@ vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.wrap = false
 vim.o.spell = true
+vim.o.cursorline = true
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
