@@ -141,6 +141,10 @@ vim.o.wrap = false
 vim.o.spell = true
 vim.o.cursorline = true
 vim.o.relativenumber = true
+--vim.o.listchars = tab:»\ ,trail:·
+vim.o.listchars = "trail:·"
+vim.o.list = true
+vim.o.laststatus = 3
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
