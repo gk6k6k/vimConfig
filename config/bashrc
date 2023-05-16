@@ -1,3 +1,4 @@
 unset command_not_found_handle
 export EDITOR="nvim"
 
+alias unzipAll='for i in `ls *.zip`; do n="${i%.*}"; unzip $i -d $n && rm $i; done'
