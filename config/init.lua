@@ -38,7 +38,7 @@ require('packer').startup(function(use)
 
   use { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'ray-x/cmp-treesitter' },
   }
 
   use { -- Highlight, edit, and navigate code
@@ -462,9 +462,19 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'treesitter' },
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'buffer', keyword_length = 3 },
+  },
+  formatting = {
+    fields = {"abbr", "kind", "menu"},
+    format = function(entry, vim_item)
+      local source = entry.source.name
+      vim_item.menu = "(" .. source .. ")"
+
+      return vim_item
+    end,
   },
 }
 
