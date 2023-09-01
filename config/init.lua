@@ -14,6 +14,10 @@ require('packer').startup(function(use)
   use 'b4winckler/vim-angry'
   use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
   use 'preservim/nerdtree'
+  use 'ryanoasis/vim-devicons'
+
+  use 'MattesGroeger/vim-bookmarks'
+
 
   use 'kdheepak/lazygit.nvim'
 
@@ -146,6 +150,8 @@ vim.o.listchars = "trail:·"
 vim.o.list = true
 vim.o.laststatus = 3
 
+vim.g.bookmark_auto_save = 1
+
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -192,6 +198,9 @@ require('lualine').setup {
     theme = 'onedark',
     component_separators = '|',
     section_separators = '',
+  },
+  sections = {
+    lualine_c = {{'filename', file_status = true, path = 1}},
   },
 }
 
@@ -254,7 +263,7 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'vim' },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -376,12 +385,12 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
 
-  sumneko_lua = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
+  -- sumneko_lua = {
+  --  Lua = {
+  --    workspace = { checkThirdParty = false },
+  --    telemetry = { enable = false },
+  --  },
+  -- },
 }
 
 -- Setup neovim lua configuration
