@@ -14,7 +14,9 @@ require('packer').startup(function(use)
   use 'b4winckler/vim-angry'
   use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
   use 'preservim/nerdtree'
+--  use 'nvim-treesitter/nvim-treesitter-context'
   use 'ryanoasis/vim-devicons'
+  use 'klen/nvim-config-local'
 
   use 'MattesGroeger/vim-bookmarks'
 
@@ -209,10 +211,10 @@ require('Comment').setup()
 
 -- Enable `lukas-reineke/indent-blankline.nvim`
 -- See `:help indent_blankline.txt`
-require('indent_blankline').setup {
-  char = '┊',
-  show_trailing_blankline_indent = false,
-}
+--require('indent_blankline').setup {
+--  char = '┊',
+--  show_trailing_blankline_indent = false,
+--}
 
 -- Gitsigns
 -- See `:help gitsigns.txt`
@@ -237,6 +239,19 @@ require('telescope').setup {
       },
     },
   },
+}
+
+require('config-local').setup {
+  -- Default options (optional)
+  -- Config file patterns to load (lua supported)
+  config_files = { ".nvim.lua" },
+  -- Where the plugin keeps files data
+  hashfile = vim.fn.stdpath("data") .. "/config-local",
+
+  autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
+  commands_create = true,     -- Create commands (ConfigLocalSource, ConfigLocalEdit, ConfigLocalTrust, ConfigLocalIgnore)
+  silent = false,             -- Disable plugin messages (Config loaded/ignored)
+  lookup_parents = false,     -- Lookup config files in parent directories
 }
 
 -- Enable telescope fzf native, if installed
