@@ -67,6 +67,15 @@ vim.opt.rtp:prepend(lazypath)
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
+  -- start
+  'b4winckler/vim-angry',
+  'sbdchd/neoformat',
+  'preservim/nerdtree',
+  'klen/nvim-config-local',
+  'MattesGroeger/vim-bookmarks',
+  'kdheepak/lazygit.nvim',
+  'Issafalcon/lsp-overloads.nvim',
+  -- end 
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
@@ -209,17 +218,20 @@ require('lazy').setup({
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_c = {{'filename', file_status = true, path = 1}},
+      },
     },
   },
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help ibl`
-    main = 'ibl',
-    opts = {},
-  },
+--  {
+--    -- Add indentation guides even on blank lines
+--    'lukas-reineke/indent-blankline.nvim',
+--    -- Enable `lukas-reineke/indent-blankline.nvim`
+--    -- See `:help ibl`
+--    main = 'ibl',
+--    opts = {},
+--  },
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
@@ -274,7 +286,7 @@ require('lazy').setup({
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -407,7 +419,7 @@ local function telescope_live_grep_open_files()
   }
 end
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
-vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
+--vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
@@ -659,3 +671,39 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+vim.o.autoindent = true
+vim.o.smartindent = true
+vim.o.cino = 'g0N-s'
+vim.o.expandtab = true
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.wrap = false
+vim.o.spell = true
+vim.o.cursorline = true
+vim.o.relativenumber = true
+--vim.o.listchars = tab:»\ ,trail:·
+vim.o.listchars = "trail:·"
+vim.o.list = true
+vim.o.laststatus = 3
+
+vim.g.bookmark_auto_save = 1
+--
+vim.keymap.set({ 'n' }, '<A-Down>', '<C-W><C-J>')
+vim.keymap.set({ 'n' }, '<A-Up>', '<C-W><C-K>')
+vim.keymap.set({ 'n' }, '<A-Right>', '<C-W><C-L>')
+vim.keymap.set({ 'n' }, '<A-Left>', '<C-W><C-H>')
+
+vim.keymap.set({ 'n' }, '<C-Right>', ':tabnext<CR>')
+vim.keymap.set({ 'n' }, '<C-Left>', '::tabprevious<CR>')
+
+vim.keymap.set({ 'n' }, '<F2>', ':NERDTreeToggle<CR>')
+vim.keymap.set({ 'n' }, '<F3>', ':LazyGit<CR>')
+vim.keymap.set({ 'n' }, '<F4>', ':Neoformat<CR>')
+
+vim.keymap.set('n', '<leader>ss', function() 
+  require('telescope.builtin').find_files({
+    default_text=vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t:r")
+  }) 
+end, { desc = '[S]earch current [W]ord' })
+
