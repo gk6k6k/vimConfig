@@ -84,6 +84,10 @@ return require('packer').startup(function(use)
 		}
 	}
 	use('kdheepak/lazygit.nvim')
+	use 'b4winckler/vim-angry'
+	use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
+	use 'preservim/nerdtree'
+	use 'klen/nvim-config-local'
 
 end )
 
