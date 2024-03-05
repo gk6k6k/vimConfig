@@ -69,22 +69,40 @@ require'nvim-treesitter.configs'.setup {
     },
 }
 
+  local cmp = require('cmp')
+  local cmp_action = require('lsp-zero').cmp_action()
+
+  cmp.setup({
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-j>'] = cmp.mapping.select_prev_item(cmp_select),
+      ['<C-k>'] = cmp.mapping.select_next_item(cmp_select),
+      ['<C-l>'] = cmp.mapping.confirm({ select = true }),
+       })
+  })
+
+
+
 local lsp = require("lsp-zero")
-local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
-  ['<C-j>'] = cmp.mapping.select_prev_item(cmp_select),
-  ['<C-k>'] = cmp.mapping.select_next_item(cmp_select),
-  ['<C-l>'] = cmp.mapping.confirm({ select = true }),
-  ["<C-Space>"] = cmp.mapping.complete(),
-})
-
-cmp_mappings['<Tab>'] = nil
-cmp_mappings['<S-Tab>'] = nil
-
-lsp.setup_nvim_cmp({
-  mapping = cmp_mappings
-})
+--local cmp = require('cmp')
+--local cmp_select = {behavior = cmp.SelectBehavior.Select}
+--local cmp_mappings = lsp.defaults.cmp_mappings({
+--  ['<C-j>'] = cmp.mapping.select_prev_item(cmp_select),
+--  ['<C-k>'] = cmp.mapping.select_next_item(cmp_select),
+--  ['<C-l>'] = cmp.mapping.confirm({ select = true }),
+--  ["<C-Space>"] = cmp.mapping.complete(),
+--})
+--
+--cmp_mappings['<Tab>'] = nil
+--cmp_mappings['<S-Tab>'] = nil
+--
+--lsp.setup_nvim_cmp({
+--  mapping = cmp_mappings
+--})
 
 lsp.set_preferences({
     suggest_lsp_servers = false,
