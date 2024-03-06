@@ -29,6 +29,7 @@ end, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
+vim.o.guicursor = ""
 
 vim.o.autoindent = true
 vim.o.smartindent = true
@@ -40,10 +41,13 @@ vim.o.wrap = false
 vim.o.spell = true
 vim.o.cursorline = true
 vim.o.relativenumber = true
-vim.o.listchars = "trail:·"
+vim.wo.number = true
+vim.opt.scrolloff = 8
 vim.o.list = true
 vim.o.laststatus = 3
---vim.o.listchars = tab:»\ ,trail:·
+vim.o.mouse = ''
+vim.opt.listchars = { tab = "» ", trail = '·' }
+vim.opt.colorcolumn = "120"
 
 
 require'nvim-treesitter.configs'.setup {
@@ -162,7 +166,7 @@ return require('packer').startup(function(use)
         requires = { {'nvim-lua/plenary.nvim'} }
     }
 
-    use({ 'rose-pine/neovim', as = 'rose-pine', config = function() vim.cmd('colorscheme rose-pine') end })
+    use({ 'navarasu/onedark.nvim', config = function() vim.cmd('colorscheme onedark') end })
     use( 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
     use('nvim-treesitter/playground')
 
