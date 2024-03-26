@@ -198,7 +198,11 @@ use {
     use 'b4winckler/vim-angry'
     use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
     use 'preservim/nerdtree'
-    use 'klen/nvim-config-local'
+    use {'klen/nvim-config-local',
+            config = function() require('config-local').setup {
+                config_files = { ".init.lua" },
+            } end
+    }
 
 end )
 
