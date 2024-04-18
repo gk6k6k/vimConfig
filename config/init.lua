@@ -1,3 +1,82 @@
+-- Install packer
+local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+local is_bootstrap = false
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    is_bootstrap = true
+    vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
+    vim.cmd [[packadd packer.nvim]]
+end
+
+vim.cmd [[packadd packer.nvim]]
+
+require('packer').startup(function(use)
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
+
+    use {
+        'nvim-telescope/telescope.nvim', tag = '0.1.5',
+        -- or                            , branch = '0.1.x',
+        requires = { {'nvim-lua/plenary.nvim'} }
+    }
+
+    use({ 'navarasu/onedark.nvim', config = function() vim.cmd('colorscheme onedark') end })
+    use( 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+    use('nvim-treesitter/playground')
+
+    use('mbbill/undotree')
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        branch = 'v3.x',
+        requires = {
+            -- Uncomment the two plugins below if you want to manage the language servers from neovim
+            {'williamboman/mason.nvim'},
+            {'williamboman/mason-lspconfig.nvim'},
+
+            -- LSP Support
+            {'neovim/nvim-lspconfig'},
+            -- Autocompletion
+            {'hrsh7th/nvim-cmp'},
+            {'hrsh7th/cmp-nvim-lsp'},
+            {'L3MON4D3/LuaSnip'},
+        }
+    }
+
+use {
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+}
+
+    use('kdheepak/lazygit.nvim')
+    use 'b4winckler/vim-angry'
+    use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
+    use 'preservim/nerdtree'
+    use {'klen/nvim-config-local',
+            config = function() require('config-local').setup {
+                config_files = { ".init.lua" },
+            } end
+    }
+
+  use 'tpope/vim-fugitive'
+  use 'tpope/vim-rhubarb'
+  use {'lewis6991/gitsigns.nvim', 
+    require('gitsigns').setup {
+    signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  },
+}
+}
+
+
+
+end )
+
+
+
 vim.g.mapleader = " "
 
 local builtin = require('telescope.builtin')
@@ -47,7 +126,7 @@ vim.o.list = true
 vim.o.laststatus = 3
 vim.o.mouse = ''
 vim.opt.listchars = { tab = "» ", trail = '·' }
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = "160"
 
 
 require'nvim-treesitter.configs'.setup {
@@ -145,65 +224,6 @@ require('mason-lspconfig').setup({
 })
 
 
--- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    is_bootstrap = true
-    vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-    vim.cmd [[packadd packer.nvim]]
-end
 
-vim.cmd [[packadd packer.nvim]]
-
-return require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
-
-    use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.5',
-        -- or                            , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim'} }
-    }
-
-    use({ 'navarasu/onedark.nvim', config = function() vim.cmd('colorscheme onedark') end })
-    use( 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
-    use('nvim-treesitter/playground')
-
-    use('mbbill/undotree')
-    use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
-        requires = {
-            -- Uncomment the two plugins below if you want to manage the language servers from neovim
-            {'williamboman/mason.nvim'},
-            {'williamboman/mason-lspconfig.nvim'},
-
-            -- LSP Support
-            {'neovim/nvim-lspconfig'},
-            -- Autocompletion
-            {'hrsh7th/nvim-cmp'},
-            {'hrsh7th/cmp-nvim-lsp'},
-            {'L3MON4D3/LuaSnip'},
-        }
-    }
-
-use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-}
-
-    use('kdheepak/lazygit.nvim')
-    use 'b4winckler/vim-angry'
-    use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
-    use 'preservim/nerdtree'
-    use {'klen/nvim-config-local',
-            config = function() require('config-local').setup {
-                config_files = { ".init.lua" },
-            } end
-    }
-
-end )
-
+return 
 
