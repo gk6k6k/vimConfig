@@ -39,7 +39,5 @@ RUN cd /tmp/toolchain && \
 
 ENV CMAKE_TOOLCHAIN_FILE="/tmp/toolchain/conan_toolchain.cmake"
 
-RUN echo 'alias build="if [ ! -f /tmp/build/Makefile ]; then cmake -S . -B /tmp/build; fi; cmake --build /tmp/build/ -j"' >> ~/.bashrc
-RUN echo 'alias run="if [ ! -f /tmp/build/Makefile ]; then cmake -S . -B /tmp/build; fi; cmake --build /tmp/build/ -j"' >> ~/.bashrc
 ENV PATH="${PATH}:/tmp/build/"
 
