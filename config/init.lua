@@ -17,6 +17,20 @@ require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    use({
+    "stevearc/aerial.nvim",
+    config = function()
+      require("aerial").setup({
+        on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", { buffer = bufnr })
+    vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", { buffer = bufnr })
+  end,
+
+      })
+    end,
+  })
+
     use {
         'nvim-telescope/telescope.nvim',
         tag = '0.1.5',
@@ -126,7 +140,7 @@ vim.o.softtabstop = 4
 vim.o.wrap = false
 vim.o.spell = true
 vim.o.cursorline = true
-vim.o.relativenumber = true
+--vim.o.relativenumber = true
 vim.wo.number = true
 vim.opt.scrolloff = 8
 vim.o.list = true
