@@ -21,7 +21,7 @@ USER developer
 WORKDIR /home/developer
 
 ENV PATH="${PATH}:/home/developer/.local/bin"
-RUN pip3 install --user conan pytest sphinx sphinx_rtd_theme breathe
+RUN pip3 install --user conan
 RUN conan profile detect --force
 
 RUN mkdir -p /tmp/toolchain
@@ -40,5 +40,6 @@ RUN cd /tmp/toolchain && \
 ENV CMAKE_TOOLCHAIN_FILE="/tmp/toolchain/conan_toolchain.cmake"
 
 RUN echo 'alias build="if [ ! -f /tmp/build/Makefile ]; then cmake -S . -B /tmp/build; fi; cmake --build /tmp/build/ -j"' >> ~/.bashrc
+RUN echo 'alias run="if [ ! -f /tmp/build/Makefile ]; then cmake -S . -B /tmp/build; fi; cmake --build /tmp/build/ -j"' >> ~/.bashrc
 ENV PATH="${PATH}:/tmp/build/"
 
