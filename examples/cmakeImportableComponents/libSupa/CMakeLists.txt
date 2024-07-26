@@ -6,17 +6,17 @@ add_subdirectory(foo)
 
 configure_file(
   Supa-config.cmake
-  "${CMAKE_BINARY_DIR}/Supa-config.cmake"
+  "${CMAKE_BINARY_DIR}/supa-config.cmake"
   @ONLY)
 
 include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
-  "${CMAKE_BINARY_DIR}/Supa-config-version.cmake"
+  "${CMAKE_BINARY_DIR}/supa-config-version.cmake"
   VERSION 1.0
   COMPATIBILITY AnyNewerVersion)
 
 install(
-  FILES "${CMAKE_BINARY_DIR}/Supa-config.cmake"
+  FILES "${CMAKE_BINARY_DIR}/supa-config.cmake"
   DESTINATION lib/cmake/Supa
 )
 

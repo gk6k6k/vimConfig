@@ -23,26 +23,26 @@ install(
 
 install(
   EXPORT Foo-targets
-  FILE "Supa-Foo-targets.cmake"
+  FILE "supa-foo-targets.cmake"
   NAMESPACE Supa::
   DESTINATION lib/cmake/Supa
   COMPONENT Foo)
 
 configure_file(
   foo-config.cmake.in
-  "${CMAKE_BINARY_DIR}/Supa-Foo-config.cmake"
+  "${CMAKE_BINARY_DIR}/supa-foo-config.cmake"
   @ONLY)
 
 include(CMakePackageConfigHelpers)
 
 write_basic_package_version_file(
-  "${CMAKE_BINARY_DIR}/Supa-Foo-config-version.cmake"
+  "${CMAKE_BINARY_DIR}/supa-foo-config-version.cmake"
   VERSION 1.0
   COMPATIBILITY AnyNewerVersion)
 
 install(
-  FILES "${CMAKE_BINARY_DIR}/Supa-Foo-config.cmake"
-        "${CMAKE_BINARY_DIR}/Supa-Foo-config-version.cmake"
+  FILES "${CMAKE_BINARY_DIR}/supa-foo-config.cmake"
+        "${CMAKE_BINARY_DIR}/supa-foo-config-version.cmake"
   DESTINATION lib/cmake/Supa
   COMPONENT Foo
 )
