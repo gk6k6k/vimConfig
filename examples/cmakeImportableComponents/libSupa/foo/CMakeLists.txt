@@ -48,7 +48,7 @@ install(
 )
 
 install(
-  DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include
+  DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/include/
   COMPONENT Foo
   DESTINATION include
 )
