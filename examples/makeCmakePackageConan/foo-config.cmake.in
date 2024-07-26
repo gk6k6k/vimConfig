@@ -1,0 +1,2 @@
+include(${CMAKE_CURRENT_LIST_DIR}/fooo-config-version.cmake)
+include(${CMAKE_CURRENT_LIST_DIR}/fooo-targets.cmake)
