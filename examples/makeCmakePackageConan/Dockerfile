@@ -7,5 +7,10 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
     g++ \
     cmake \
     zip \
+    python3-pip \
     && apt-get clean
+
+ENV PATH="${PATH}:/root/.local/bin"
+RUN pip3 install --user conan
+RUN conan profile detect --force
 
