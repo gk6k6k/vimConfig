@@ -5,6 +5,7 @@ project(projectRunner)
 set(CMAKE_BUILD_TYPE Release)
 
 find_package(spdlog REQUIRED)
+find_package(Fooo REQUIRED)
 
 add_executable(projectRunner
     source/main.cpp)
