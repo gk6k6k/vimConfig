@@ -17,6 +17,18 @@ require('packer').startup(function(use)
     -- Packer can manage itself
     use 'wbthomason/packer.nvim'
 
+    use({"princejoogie/dir-telescope.nvim",
+          requires = {"nvim-telescope/telescope.nvim"}, 
+          config = function()
+            require("dir-telescope").setup({
+              hidden = true,
+              no_ignore = false,
+              show_preview = true,
+              follow_symlinks = false,
+            })
+          end,
+    })
+
     use({
     "stevearc/aerial.nvim",
     config = function()
@@ -78,17 +90,17 @@ require('packer').startup(function(use)
 
     use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
-    use {
-        'lewis6991/gitsigns.nvim', require('gitsigns').setup {
-            signs = {
-                add = {text = '+'},
-                change = {text = '~'},
-                delete = {text = '_'},
-                topdelete = {text = '‾'},
-                changedelete = {text = '~'}
-            }
-        }
-    }
+--    use {
+--        'lewis6991/gitsigns.nvim', require('gitsigns').setup {
+--            signs = {
+--                add = {text = '+'},
+--                change = {text = '~'},
+--                delete = {text = '_'},
+--                topdelete = {text = '‾'},
+--                changedelete = {text = '~'}
+--            }
+--        }
+--    }
 
     use('github/copilot.vim')
 
@@ -113,12 +125,9 @@ vim.keymap.set('n', '<F2>', ':NERDTreeToggle<CR>')
 vim.keymap.set('n', '<F3>', ':LazyGit<CR>')
 vim.keymap.set('n', '<F4>', ':Neoformat<CR>')
 
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files,
-               {desc = '[S]earch [F]iles'})
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags,
-               {desc = '[S]earch [H]elp'})
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string,
-               {desc = '[S]earch current [W]ord'})
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, {desc = '[S]earch [F]iles'})
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, {desc = '[S]earch [H]elp'})
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, {desc = '[S]earch current [W]ord'})
 vim.keymap.set('n', '<leader>ss', function()
     require('telescope.builtin').find_files({
         default_text = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t:r")
