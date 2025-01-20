@@ -3,31 +3,47 @@ local install_path = vim.fn.stdpath 'data' ..
                          '/site/pack/packer/start/packer.nvim'
 local is_bootstrap = false
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    is_bootstrap = true
-    vim.fn.system {
-        'git', 'clone', '--depth', '1',
-        'https://github.com/wbthomason/packer.nvim', install_path
-    }
-    vim.cmd [[packadd packer.nvim]]
+  is_bootstrap = true
+  vim.fn.system {'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path}
+  vim.cmd [[packadd packer.nvim]]
 end
 
 vim.cmd [[packadd packer.nvim]]
 
 require('packer').startup(function(use)
-    -- Packer can manage itself
-    use 'wbthomason/packer.nvim'
+  use({'wbthomason/packer.nvim'})
 
-    use({"princejoogie/dir-telescope.nvim",
-          requires = {"nvim-telescope/telescope.nvim"}, 
-          config = function()
-            require("dir-telescope").setup({
-              hidden = true,
-              no_ignore = false,
-              show_preview = true,
-              follow_symlinks = false,
-            })
-          end,
-    })
+  use({'nvim-telescope/telescope.nvim',
+        tag = '0.1.8',
+        requires = { {'nvim-lua/plenary.nvim'} }
+  })
+
+  use({'princejoogie/dir-telescope.nvim',
+        requires = {'nvim-telescope/telescope.nvim'},
+        config = function()
+          require('dir-telescope').setup({
+            hidden = true,
+            no_ignore = false,
+            show_preview = true,
+            follow_symlinks = false,
+          })
+        end,
+  })
+
+  use({'b4winckler/vim-angry'})
+
+  use({'navarasu/onedark.nvim',
+        config = function()
+          vim.cmd('colorscheme onedark')
+        end
+  })
+
+  use{('kdheepak/lazygit.nvim')}
+
+
+
+
+
 
     use({
     "stevearc/aerial.nvim",
@@ -43,17 +59,6 @@ require('packer').startup(function(use)
     end,
   })
 
-    use {
-        'nvim-telescope/telescope.nvim',
-        tag = '0.1.5',
-        -- or                            , branch = '0.1.x',
-        requires = {{'nvim-lua/plenary.nvim'}}
-    }
-
-    use({
-        'navarasu/onedark.nvim',
-        config = function() vim.cmd('colorscheme onedark') end
-    })
     use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
     use('nvim-treesitter/playground')
 
@@ -77,8 +82,6 @@ require('packer').startup(function(use)
         "neovim/nvim-lspconfig"
     }
 
-    use('kdheepak/lazygit.nvim')
-    use 'b4winckler/vim-angry'
     use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
     use 'preservim/nerdtree'
     use {
@@ -88,7 +91,6 @@ require('packer').startup(function(use)
         end
     }
 
-    use 'tpope/vim-fugitive'
     use 'tpope/vim-rhubarb'
 --    use {
 --        'lewis6991/gitsigns.nvim', require('gitsigns').setup {
