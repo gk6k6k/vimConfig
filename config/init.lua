@@ -32,12 +32,21 @@ require('packer').startup(function(use)
 
   use({'b4winckler/vim-angry'})
 
+  use({'sbdchd/neoformat'}) -- For cmake -> pip install --user cmake-format
+
   use({'navarasu/onedark.nvim',
         config = function()
           vim.cmd('colorscheme onedark')
         end
   })
 
+  use({'klen/nvim-config-local',
+        config = function()
+          require('config-local').setup {config_files = {".init.lua"}}
+        end
+  })
+
+  use{('preservim/nerdtree')}
   use{('kdheepak/lazygit.nvim')}
 
 
@@ -82,14 +91,6 @@ require('packer').startup(function(use)
         "neovim/nvim-lspconfig"
     }
 
-    use 'sbdchd/neoformat' -- For cmake -> pip install --user cmake-format
-    use 'preservim/nerdtree'
-    use {
-        'klen/nvim-config-local',
-        config = function()
-            require('config-local').setup {config_files = {".init.lua"}}
-        end
-    }
 
     use 'tpope/vim-rhubarb'
 --    use {
