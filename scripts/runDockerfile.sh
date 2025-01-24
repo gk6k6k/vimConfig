@@ -26,7 +26,7 @@ DOCKER_IMAGE_NAME=("autoimagename_"$(md5sum ${PATH_DOCKERFILE}))
 
 if [ ! -f /.dockerenv ]; then
     if [ -z "$(docker images -q ${DOCKER_IMAGE_NAME} 2> /dev/null)" ]; then
-        docker build -t ${DOCKER_IMAGE_NAME} "${PATH_DOCKERFILE%/*}/"
+        docker build -t ${DOCKER_IMAGE_NAME} -f "${PATH_DOCKERFILE}" .
     fi
     #docker run -it --user $(id -u):$(id -g) -v $(pwd):$(pwd) -w $(pwd) ${ARGS_DOCKER} ${DOCKER_IMAGE_NAME} /bin/bash
     docker run -it -v $(pwd):$(pwd) -w $(pwd) ${ARGS_DOCKER} ${DOCKER_IMAGE_NAME} /bin/bash
