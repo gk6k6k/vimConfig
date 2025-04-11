@@ -31,6 +31,7 @@ require('packer').startup(function(use)
   })
 
   use({'b4winckler/vim-angry'})
+  use({'alvan/vim-closetag'})
 
   use({'sbdchd/neoformat'}) -- For cmake -> pip install --user cmake-format
 
