@@ -7,10 +7,8 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean
 
 RUN cd /tmp/ && \
-    wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz && \
-    tar -zxvf nvim-linux64.tar.gz && \
-    wget https://go.dev/dl/go1.18.4.linux-amd64.tar.gz && \
-    tar -zxvf go1.18.4.linux-amd64.tar.gz && \
+    wget https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz && \
+    tar -zxvf nvim-linux-x86_64.tar.gz && \
     echo ""
 
 #RUN echo "export PATH=\$PATH:/tmp/go/bin" >> ~/.bashrc
@@ -20,8 +18,7 @@ RUN cd /tmp/ && \
 
 RUN mkdir -p ~/.config/nvim/autoload/
 RUN curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-ARG NVIM_INIT_PATH
-ADD ${NVIM_INIT_PATH} ~/.config/nvim/
+ADD init.lua ~/.config/nvim/
 
 
 #RUN mkdir -p /home/developer/.config/nvim/

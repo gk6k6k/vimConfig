@@ -20,19 +20,12 @@ if [ ! -f ${PATH_DOCKERFILE} ]; then
     exit 1
 fi
 
-#echo "run ${PATH_DOCKERFILE} ${ARGS_DOCKER}"
-
 DOCKER_IMAGE_NAME=("autoimagename_"$(md5sum ${PATH_DOCKERFILE}))
 
 if [ ! -f /.dockerenv ]; then
     if [ -z "$(docker images -q ${DOCKER_IMAGE_NAME} 2> /dev/null)" ]; then
         docker build -t ${DOCKER_IMAGE_NAME} -f "${PATH_DOCKERFILE}" .
     fi
-    #docker run -it --user $(id -u):$(id -g) -v $(pwd):$(pwd) -w $(pwd) ${ARGS_DOCKER} ${DOCKER_IMAGE_NAME} /bin/bash
+    echo "runing iamge ${DOCKER_IMAGE_NAME} ${ARGS_DOCKER}"
     docker run -it -v $(pwd):$(pwd) -w $(pwd) ${ARGS_DOCKER} ${DOCKER_IMAGE_NAME} /bin/bash
-else
-    echo ""
-    #build backend
-    #echo "cmake -S ./backend/ -B /tmp/build -DCMAKE_TOOLCHAIN_FILE=/tmp/toolchain/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release"
-    #echo "cmake --build /tmp/build/ -j"
 fi
