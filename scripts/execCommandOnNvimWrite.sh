@@ -50,13 +50,15 @@ else
     echo "Pipe ${PIPE} exists, reusing"
 fi
 
+PIPE=$(readlink -f ${PIPE})
+
 echo "Use nvim script: :autocmd BufWritePost * silent! !echo \"p\" > ${PIPE} &"
 
 while true
 do
     while read i
     do
-
+        echo -n "";
     done < ${PIPE};
     echo "-> ${CMD}"
     ${CMD}
