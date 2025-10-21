@@ -31,6 +31,7 @@ require('packer').startup(function(use)
   })
 
   use({'b4winckler/vim-angry'})
+  use({'tpope/vim-surround'})
   use({'alvan/vim-closetag'})
 
   use({'sbdchd/neoformat'}) -- For cmake -> pip install --user cmake-format
@@ -51,9 +52,7 @@ require('packer').startup(function(use)
   use{('kdheepak/lazygit.nvim')}
 
 
-
-
-
+  -- ========================================================
 
     use({
     "stevearc/aerial.nvim",
