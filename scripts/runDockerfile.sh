@@ -60,7 +60,8 @@ vecho "REBUILD=${REBUILD} DOCKER_IMAGE_SOURCE_FILE=${DOCKER_IMAGE_SOURCE_FILE} D
 
 if [ -z "$(docker images -q ${DOCKER_IMAGE_NAME} 2> /dev/null)" ]; then
   vecho "Building image ${DOCKER_IMAGE_NAME}"
-  docker build -t ${DOCKER_IMAGE_NAME} -f "${PATH_DOCKERFILE}" .
+  (cd "$(dirname "${DOCKER_IMAGE_SOURCE_FILE}")" && docker build -t ${DOCKER_IMAGE_NAME} -f $(basename "${DOCKER_IMAGE_SOURCE_FILE}") .)
+  vecho "Building image ${DOCKER_IMAGE_NAME} complete"
 fi
 
 if docker inspect "${DOCKER_CONTAINER_NAME}" > /dev/null 2>&1; then
@@ -79,6 +80,7 @@ if docker inspect "${DOCKER_CONTAINER_NAME}" > /dev/null 2>&1; then
     fi
   fi
 else
+  vecho "${DOCKER_CONTAINER_NAME} not exists."
   docker run -it --name ${DOCKER_CONTAINER_NAME} -v $(pwd):$(pwd) -w $(pwd) ${DOCKER_ARGS_RUN} ${DOCKER_IMAGE_NAME} /bin/bash
 fi
 
