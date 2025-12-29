@@ -64,11 +64,16 @@ if [ -z "$(docker images -q ${DOCKER_IMAGE_NAME} 2> /dev/null)" ]; then
   vecho "Building image ${DOCKER_IMAGE_NAME} complete"
 fi
 
+PRE_RUN=$(grep '#runDockerfile-prerun ' ${DOCKER_IMAGE_SOURCE_FILE} | sed 's/#runDockerfile-prerun //')
+DOCKER_ARGS_RUN=$(grep '#runDockerfile-run ' ${DOCKER_IMAGE_SOURCE_FILE} | sed 's/#runDockerfile-run //')
+
 if docker inspect "${DOCKER_CONTAINER_NAME}" > /dev/null 2>&1; then
   vecho "${DOCKER_CONTAINER_NAME} exists."
   if [[ ${REBUILD} -eq 1 ]]; then
     vecho "Removing container ${DOCKER_CONTAINER_NAME}"
     docker container rm ${DOCKER_CONTAINER_NAME}
+    vecho "Running:  docker run -it --name ${DOCKER_CONTAINER_NAME} -v $(pwd):$(pwd) -w $(pwd) ${DOCKER_ARGS_RUN} ${DOCKER_IMAGE_NAME} /bin/bash"
+    eval ${PRE_RUN}
     docker run -it --name ${DOCKER_CONTAINER_NAME} -v $(pwd):$(pwd) -w $(pwd) ${DOCKER_ARGS_RUN} ${DOCKER_IMAGE_NAME} /bin/bash
   else
     vecho "Reconnecting to container ${DOCKER_CONTAINER_NAME}"
@@ -81,6 +86,8 @@ if docker inspect "${DOCKER_CONTAINER_NAME}" > /dev/null 2>&1; then
   fi
 else
   vecho "${DOCKER_CONTAINER_NAME} not exists."
+  vecho "Running:  docker run -it --name ${DOCKER_CONTAINER_NAME} -v $(pwd):$(pwd) -w $(pwd) ${DOCKER_ARGS_RUN} ${DOCKER_IMAGE_NAME} /bin/bash"
+  eval ${PRE_RUN}
   docker run -it --name ${DOCKER_CONTAINER_NAME} -v $(pwd):$(pwd) -w $(pwd) ${DOCKER_ARGS_RUN} ${DOCKER_IMAGE_NAME} /bin/bash
 fi
 
